@@ -1,6 +1,6 @@
 //===- Mutators.h -----------------------------------------------*- C++ -*-===//
 //
-//  Copyright (C) 2017  Mario Barbareschi (mario.barbareschi@unina.it)
+//  Copyright (C) 2017  
 //
 //  This file is part of Clang-Toolnumberone.
 //
@@ -19,7 +19,7 @@
 //
 //===----------------------------------------------------------------------===//
 /// \file Mutators.h
-/// \author Mario Barbareschi
+/// \author 
 /// \brief This file contains mutators definition for VPA
 //===----------------------------------------------------------------------===//
 

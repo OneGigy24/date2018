@@ -1,6 +1,6 @@
 //===- Operator.h -----------------------------------------------*- C++ -*-===//
 //
-//  Copyright (C) 2017  Mario Barbareschi (mario.barbareschi@unina.it)
+//  Copyright (C) 2017  
 //
 //  This file is part of Clang-Toolnumberone.
 //
@@ -19,7 +19,7 @@
 //
 //===----------------------------------------------------------------------===//
 /// \file Operator.h
-/// \author Mario Barbareschi
+/// \author 
 /// \brief This file contains operators definition for VPA
 //===----------------------------------------------------------------------===//
 

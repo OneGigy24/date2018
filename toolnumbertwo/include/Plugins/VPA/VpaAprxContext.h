@@ -1,6 +1,6 @@
 /* * Toolnumbertwo - Design Space Exploration for Approximate Computing technique using
  * Gentic Algorithm
-// Copyright (C) 2017 Mario Barbareschi <mario.barbareschi@unina.it>
+// Copyright (C) 2017 
  *
  * This file is part of Toolnumbertwo.
  *
@@ -20,7 +20,7 @@
 
 /******************************************************************************
  * @file   VpaAprxTechnique.h
- * @author Mario Barareschi
+ * @author 
  * @date   30 jun 2017
  * @brief  Implementation for the apprx Contexts of VPA library
  ******************************************************************************/

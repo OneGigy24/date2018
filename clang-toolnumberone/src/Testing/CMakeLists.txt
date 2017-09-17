@@ -1,0 +1,10 @@
+add_library(testing
+            ToolnumberoneTest.cpp
+            gtest/gtest-all.cc
+            )
+
+target_include_directories(testing
+                           PRIVATE ${CMAKE_SOURCE_DIR}/include
+                           PRIVATE ${CMAKE_SOURCE_DIR}/include/lib
+                           )
+target_link_libraries(testing core)

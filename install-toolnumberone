@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+
+#### Copy all output to log file.
+log=install.$$.log
+echo "Recording log in $log ..."
+exec > >(tee $log) # Requires fdescfs mounted to /dev/fd on FreeBSD.
+exec 2>&1
+
+cd /opt
+cd clang-toolnumberone
+mkdir build
+cd build
+cmake ../
+make -j4
+make install

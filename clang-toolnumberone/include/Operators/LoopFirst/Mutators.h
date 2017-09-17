@@ -1,0 +1,90 @@
+//===- Mutators.h -----------------------------------------------*- C++ -*-===//
+//
+//  Copyright (C) 2015, 2016 Antonio Tammaro  (ntonjeta@autistici.org)
+//
+//  This file is part of Clang-Toolnumberone.
+//
+//  Clang-Toolnumberone is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Affero General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Clang-Toolnumberone is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Affero General Public License for more details.
+//
+//  You should have received a copy of the GNU Affero General Public License
+//  along with Clang-Toolnumberone. If not, see <http://www.gnu.org/licenses/>.
+//
+//===----------------------------------------------------------------------===//
+/// \file Mutators.h
+/// \author Antonio Tammaro
+///// \brief This file contains loop perforation mutators
+//===----------------------------------------------------------------------===//
+
+#ifndef INCLUDE_OPERATORS_PERFORATION_MUTATORS_H
+#define INCLUDE_OPERATORS_PERFORATION_MUTATORS_H
+
+#include "Core/Mutator.h"
+
+using namespace clang;
+using namespace clang::ast_matchers;
+
+namespace toolnumberone
+{
+namespace perforation
+{
+
+/// \addtogroup OPERATORS_SAMPLE_MUTATORS Sample Mutators
+/// \{
+
+/**
+ * @brief This mutator try to apply loop perforation technique for approximate computing
+ *        others (at the moment -).
+ */
+class MutatorLoopPerforation1 : public toolnumberone::mutator::Mutator
+{
+  struct MutationInfo {
+    ::std::string opId;  //!< Operation Identifier
+    unsigned line;       //!< Occurrence line
+    ::std::string inc;   //!< Increment or decrement for
+    int forLenght;       //!< Lenght of for
+  };
+
+  public:
+    /**
+     * @brief Constuctor
+     */
+    MutatorLoopPerforation1()
+        : Mutator ( ::toolnumberone::mutator::StatementMatcherType, // A binary operator is a statement
+                    "mutator_loop_perforation_operator", // String identifier
+                    "loop perforation", // Description
+                    1,
+                    true),inc(nullptr),binc(nullptr),cond(nullptr),bas(nullptr),opId(0) { }
+    virtual clang::ast_matchers::StatementMatcher getStatementMatcher() override; // Need to override this method, first part of matching rules
+    virtual bool match ( const ::toolnumberone::mutator::NodeType &node ) override; // Also this one, second part of matching rules
+    virtual bool getMatchedNode ( const toolnumberone::mutator::NodeType &,
+                                  clang::ast_type_traits::DynTypedNode & ) override; // This is pure virtual and must be implemented
+    virtual clang::Rewriter &mutate ( const toolnumberone::mutator::NodeType &node,
+                                      mutator::MutatorType type,
+                                      clang::Rewriter &rw ) override; // mutation rulesi
+
+    virtual void onCreatedMutant(const ::std::string &mutantPath) override;
+  private: 
+    const ::clang::BinaryOperator *cond; // < Retrive ForStmt condition  
+    const ::clang::UnaryOperator *inc; // < Retrive ForStmt increment  
+    const ::clang::BinaryOperator *binc; // < Retrive ForStmt increment in case of binary increment
+    const ::clang::BinaryOperator *bas; // < Retrive ForStmt increment in case of binary increment
+    const ::clang::BinaryOperator *init; 
+    unsigned int opId; //< Counter to keep tracks of done mutations
+    
+    ::std::vector<MutationInfo> mutationsInfo;  ///< It maintains info about mutations, in order to be saved
+    void clean ();
+};
+
+/// \}
+} // end namespace toolnumberone::perforation
+} // end namespace toolnumberone
+
+#endif /* INCLUDE_OPERATORS_PERFORATION_MUTATORS_H */

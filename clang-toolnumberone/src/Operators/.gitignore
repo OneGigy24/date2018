@@ -1,0 +1,8 @@
+# Excludes Operators
+#*/*
+
+# Include CMake files
+!./CMakeLists.txt
+
+# Include sample Operators
+!./Examples
